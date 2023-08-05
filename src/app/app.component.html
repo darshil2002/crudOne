@@ -1,0 +1,87 @@
+<p>
+  <mat-toolbar color="primary">
+   <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>My App</span>
+  <span class="example-spacer"></span>
+  <button mat-raised-button type="submit" (click)="openDailog()">
+   Add employee 
+ </button>
+</mat-toolbar>
+</p>
+
+<mat-form-field style="width: 100%;">
+  <input matInput (keyup)="applyFilter($event)" placeholder="Filter" >
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">  
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+    </ng-container>
+
+    <!-- Progress Column -->
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name </th>
+      <td mat-cell *matCellDef="let row"> {{row.firstName}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+      <td mat-cell *matCellDef="let row"> {{row.lastName}} </td>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+      <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+    </ng-container>
+    <ng-container matColumnDef="dob">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Date of Birth</th>
+      <td mat-cell *matCellDef="let row"> {{row.dob | date}} </td>
+    </ng-container>
+    <ng-container matColumnDef="gender">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+      <td mat-cell *matCellDef="let row"> {{row.gender}} </td>
+    </ng-container>
+    <ng-container matColumnDef="education">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Education </th>
+      <td mat-cell *matCellDef="let row"> {{row.education}} </td>
+    </ng-container>
+    <ng-container matColumnDef="company">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Company</th>
+      <td mat-cell *matCellDef="let row"> {{row.company}} </td>
+    </ng-container>
+    <ng-container matColumnDef="experience">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Experience </th>
+      <td mat-cell *matCellDef="let row"> {{row.experience}} </td>
+    </ng-container>
+    <ng-container matColumnDef="package">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Package</th>
+      <td mat-cell *matCellDef="let row"> {{row.package | currency:'INR'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+      <td mat-cell *matCellDef="let row"> 
+        <button mat-icon-button type="button" (click)="editEmployee(row)">
+          <mat-icon color="primary">edit</mat-icon>
+        </button>  
+        <button mat-icon-button (click)="deleteEmpoyee(row.id)" type="button">
+          <mat-icon color="warn">delete</mat-icon>
+        </button>  
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+    
+
+
